@@ -1,0 +1,47 @@
+CREATE DATABASE TPerfect_Trip;
+
+
+Use TPerfect_Trip;
+
+
+CREATE TABLE Usuario(
+idUsuario INT AUTO_INCREMENT PRIMARY KEY,
+nomeUsuario VARCHAR (255) NOT NULL,
+senhaUsuario VARCHAR (9) UNIQUE NOT NULL,
+tipoAcesso TEXT(10) NOT NULL
+);
+
+CREATE TABLE Cliente(
+idCliente INT AUTO_INCREMENT PRIMARY KEY,
+nomeCliente VARCHAR(255) NOT NULL,
+cpfCliente VARCHAR(11) UNIQUE NOT NULL,
+rgCliente VARCHAR(9) UNIQUE NOT NULL,
+telefoneCliente VARCHAR(16)NOT NULL
+);
+
+
+CREATE TABLE Viagem(
+idViagem INT AUTO_INCREMENT PRIMARY KEY,
+origemViagem VARCHAR(255) NOT NULL,
+destinoViagem VARCHAR(255) NOT NULL,
+dataViagem VARCHAR(10) NOT NULL,
+horaPartida VARCHAR(10) NOT NULL
+);
+-
+CREATE TABLE Pacote(
+idPacote INT AUTO_INCREMENT PRIMARY KEY,
+idaVolta VARCHAR(2) NOT NULL,
+hospedagemPacote VARCHAR(255) NOT NULL,
+cidadeTour VARCHAR(255) NOT NULL,
+aluguelCarro VARCHAR(7) UNIQUE NOT NULL,
+alimentacaoPacote VARCHAR(255) NOT NULL,
+idCliente INT NOT NULL,
+FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente)
+);
+
+CREATE TABLE Inclusao(
+idViagem INT NOT NULL,
+idPacote INT NOT NULL,
+FOREIGN KEY (idViagem) REFERENCES Viagem(idViagem),
+FOREIGN KEY  (idPacote) REFERENCES Pacote(idPacote)
+);
